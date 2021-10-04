@@ -41,8 +41,8 @@ public class TarefaDaoTest {
 	public void busca() {
 		
 	
-		Tarefa t1 = tarefaDao.buscas(4);
-		Tarefa t2 = tarefaDao.buscas(5);
+		Tarefa t1 = tarefaDao.buscar(4);
+		Tarefa t2 = tarefaDao.buscar(5);
 		
 		System.out.println(t1);
 		System.out.println(t2);

@@ -22,11 +22,11 @@ public class TarefaDao {
 		sessao.persist(tarefa);
 		transacao.commit();
 		sessao.close();
-		tarefa = new Tarefa();
+		
 
 	}
 
-	public Tarefa buscas(Integer numero) {
+	public Tarefa buscar(Integer numero) {
 		sessao = JpaUtil.getEntityManager();
 		Tarefa tarefa = sessao.find(Tarefa.class, numero);
 		return tarefa;
