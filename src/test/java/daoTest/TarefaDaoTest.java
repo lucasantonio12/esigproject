@@ -7,7 +7,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import dao.FuncionarioDao;
 import dao.TarefaDao;
+import domain.Funcionario;
 import domain.Tarefa;
 
 @FixMethodOrder(MethodSorters.JVM)
@@ -20,14 +22,19 @@ public class TarefaDaoTest {
 	@Test
 	public void salvar() {
 		
-		Tarefa tarefa = new Tarefa();
+	
+		Funcionario fun = new Funcionario(null,"Lucas", "programador", "namorando", "clt");
+		Funcionario fun2 = new Funcionario(null,"adriano", "asg", "casado", "clt");
+		Funcionario fun3 = new Funcionario(null,"paula", "front-end programer", "solteira", "clt");
 		
+		FuncionarioDao funDao = new FuncionarioDao();
+		funDao.salvar(fun);
+		funDao.salvar(fun2);
+		funDao.salvar(fun3);
 		
-		tarefa.setTitulo("programar front end");
-		tarefa.setDescricao("desig do site.");
-		
-		Tarefa tarefa2 = new Tarefa("limpar","limpesa da sala2");
-		Tarefa tarefa3= new Tarefa("manutenção dos pcs ","manutenção na sala de programação");
+		Tarefa tarefa = new Tarefa(null,"programar esig projeto", "fazer projeto", fun);
+		Tarefa tarefa2 = new Tarefa(null,"limpar", "limpar sala2", fun2);
+		Tarefa tarefa3 = new Tarefa(null,"programar front-end", "fazer o projeto", fun3);
 		
 		tarefaDao = new TarefaDao();
 		tarefaDao.salvar(tarefa);
@@ -57,6 +64,5 @@ public class TarefaDaoTest {
 			System.out.println(tarefa);
 		}
 	}
-
 	
 }

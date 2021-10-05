@@ -15,7 +15,7 @@ public class FuncionarioDao {
 	private EntityManager sessao;
 	private EntityTransaction transacao;
 	
-	public void save(Funcionario funcionario) {
+	public void salvar(Funcionario funcionario) {
 		sessao = JpaUtil.getEntityManager();
 		transacao = sessao.getTransaction();
 		transacao.begin();
@@ -33,7 +33,7 @@ public class FuncionarioDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Funcionario>  listar() {
-		String jpql = "select t from Funcionairo t order by titulo";
+		String jpql = "select f from Funcionario f order by nome";
 		sessao = JpaUtil.getEntityManager();
 		Query consulta = sessao.createQuery(jpql);
 		List<Funcionario> funcionario = consulta.getResultList();
