@@ -11,15 +11,24 @@
 <h:body>
 	<h:form>
 		<p:panel header="Cadastro Funcionario">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
 			<div class="Campos">
-				<h5>Nome</h5>
-				<p:inputText />
-				<h5>s</h5>
-				<p:inputText />
-				<h5>Nome</h5>
-				<p:inputText />
+				<p:outputLabel value="Nome" />
+				<p:inputText  value="#{Funcionario.funcionario.nome}"/>
+				<p:outputLabel value="Especialização" />
+				<p:inputText value="#{Funcionario.funcionario.especializacao}"/>
+				<br/>
+				<p:outputLabel value="Cargo" />
+				<p:inputText value="#{Funcionario.funcionario.cargo}"/>
+				<p:outputLabel value="EstadoCivil" />
+				<p:inputText value="#{Funcionario.funcionario.estadoCivil}"/>
+				<br/>
+				<p:commandButton value="Salvar"
+					actionListener="#{Funcionario.salvar}" />
 			</div>
-			
+
 		</p:panel>
 
 	</h:form>
