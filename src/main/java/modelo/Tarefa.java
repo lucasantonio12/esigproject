@@ -26,7 +26,7 @@ public class Tarefa {
 	private String descricao;
 
 	@ManyToMany(cascade = {CascadeType.MERGE})
-	@JoinTable(name = "Tarefa_funcionarios",
+	@JoinTable(name = "tarefa_funcionarios",
 			joinColumns = @JoinColumn(name = "tarefa_id"),
 			inverseJoinColumns = @JoinColumn(name = "funcionarios_id"))
 	private List<Funcionario> funcionarios;

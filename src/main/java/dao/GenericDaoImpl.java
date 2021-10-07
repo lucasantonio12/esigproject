@@ -2,6 +2,8 @@ package dao;
 
 import java.io.Serializable;
 
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import interfaces.IGenericDao;
@@ -33,7 +35,7 @@ public class GenericDaoImpl<T, ID extends Serializable> implements IGenericDao<T
 	public void salvar(T object) {
 		this.session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.persist((T) object);
+		session.saveOrUpdate((T) object);
 		t.commit();
 		this.session.close();
 	}

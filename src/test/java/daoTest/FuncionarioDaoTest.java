@@ -17,7 +17,7 @@ import modelo.Tarefa;
 public class FuncionarioDaoTest {
 	
 	FuncionarioDao funDao = new FuncionarioDao();
-	Funcionario fun = new Funcionario(10,"Lucas", "programador", "namorando", "clt");
+	Funcionario fun = new Funcionario("Lucas", "programador", "namorando", "clt");
 	
 	
 	@Test
@@ -29,7 +29,7 @@ public class FuncionarioDaoTest {
 		Funcionario fun3 = new Funcionario("paula", "front-end programer", "solteira", "clt");
 		
 	
-		//funDao.salvar(fun);
+		funDao.salvar(fun);
 		funDao.salvar(fun2);
 		funDao.salvar(fun3);	
 		
@@ -48,7 +48,7 @@ public class FuncionarioDaoTest {
 	@Test
 	public void deletar() {
 		Funcionario f1 = funDao.buscarId(1);
-		funDao.deletar(f1);		
+		funDao.deleteAssociacao(f1);		
 	}
 	
 	@Test
@@ -67,4 +67,5 @@ public class FuncionarioDaoTest {
 			System.out.println(funcionario);
 		}
 	}
+	
 }

@@ -9,27 +9,66 @@
 	<title>Funcionario</title>
 </h:head>
 <h:body>
-	<h:form>
-		<p:panel header="Cadastro Funcionario">
-			<p:growl>
-				<p:autoUpdate />
-			</p:growl>
-			<div class="Campos">
-				<p:outputLabel value="Nome" />
-				<p:inputText  value="#{Funcionario.funcionario.nome}"/>
-				<p:outputLabel value="Especialização" />
-				<p:inputText value="#{Funcionario.funcionario.especializacao}"/>
-				<br/>
-				<p:outputLabel value="Cargo" />
-				<p:inputText value="#{Funcionario.funcionario.cargo}"/>
-				<p:outputLabel value="EstadoCivil" />
-				<p:inputText value="#{Funcionario.funcionario.estadoCivil}"/>
-				<br/>
-				<p:commandButton value="Salvar"
-					actionListener="#{Funcionario.salvar}" />
-			</div>
+	<h:form id="painelDados">
+		<div class="Campos" align="center">
+			<p:panel header="Cadastrar Funcionarios">
+				<p:growl showDetail="true" sticky="true">
+					<p:autoUpdate />
+				</p:growl>
 
-		</p:panel>
+				<p:panelGrid columns="4">
+					<p:outputLabel value="Nome" />
+					<p:inputText value="#{Funcionario.funcionario.nome}"
+						required="true" requiredMessage="Campo Nome é Obrigatorio" />
+					<p:outputLabel value="Especialização" />
+					<p:inputText value="#{Funcionario.funcionario.especializacao}" />
+					<p:outputLabel value="Cargo" />
+					<p:inputText value="#{Funcionario.funcionario.cargo}"
+						required="true" requiredMessage="Campo Cargo é Obrigatorio" />
+					<p:outputLabel value="Estado Civil" />
+					<p:inputText value="#{Funcionario.funcionario.estadoCivil}"
+						required="true" requiredMessage="Campo Estado Civil é Obrigatorio" />
+				</p:panelGrid>
+				<p:panelGrid columns="1">
+					<p:commandButton value="Salvar"
+						actionListener="#{Funcionario.salvar}"
+						update="painelDados listarDados" ajax="true" />
+				</p:panelGrid>
+
+			</p:panel>
+		</div>
+	</h:form>
+	<p:separator />
+	<h:form id="listarDados">
+		<div class="listar" align="center">
+			<p:panel header="Listar Funcionarios">
+				<p:dataTable emptyMessage="Nenhum funcionario cadastrado"
+					paginator="true" var="fun" value="#{Funcionario.listaFuncionarios}">
+					<p:column headerText="Nome">
+						<h:outputText value="#{fun.nome}" />
+					</p:column>
+					<p:column headerText="Especialisação">
+						<h:outputText value="#{fun.especializacao}" />
+					</p:column>
+					<p:column headerText="Cargo">
+						<h:outputText value="#{fun.cargo}" />
+					</p:column>
+					<p:column headerText="Estado Civil">
+						<h:outputText value="#{fun.estadoCivil}" />
+					</p:column>
+					<p:column headerText="Opções">
+						<p:commandButton value= "Editar" actionListener="#{Funcionario.editar(fun)}" ajax="true"
+							update="painelDados listarDados">                       
+						</p:commandButton>
+
+						<p:commandButton value= "Deletar" actionListener="#{Funcionario.deletar(fun)}" ajax="true"
+							update="painelDados listarDados">                       
+						</p:commandButton>
+						
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</div>
 
 	</h:form>
 
