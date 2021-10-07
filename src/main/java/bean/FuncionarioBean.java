@@ -9,8 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import dao.FuncionarioDao;
-import domain.Funcionario;
 import lombok.Data;
+import modelo.Funcionario;
 
 @ManagedBean(name = "Funcionario",eager = true)
 @Named

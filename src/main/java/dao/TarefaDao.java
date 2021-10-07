@@ -5,43 +5,30 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import domain.Tarefa;
-import util.JpaUtil;
+import interfaces.ITarefaDao;
+import modelo.Tarefa;
+import util.HibernateUtil;
 
-public class TarefaDao {
+public class TarefaDao extends GenericDaoImpl<Tarefa, Integer> implements ITarefaDao {
 
-	private EntityManager sessao;
-	private EntityTransaction transacao;
-
-	public void salvar(Tarefa tarefa) {
-
-		sessao = JpaUtil.getEntityManager();
-		transacao = sessao.getTransaction();
-		transacao.begin();
-		sessao.persist(tarefa);
-		transacao.commit();
-		sessao.close();
-		
-
-	}
-
-	public Tarefa buscar(Integer numero) {
-		sessao = JpaUtil.getEntityManager();
-		Tarefa tarefa = sessao.find(Tarefa.class, numero);
-		return tarefa;
+	public TarefaDao() {
+		super(Tarefa.class);
+			
 	}
 	
+	
 	@SuppressWarnings("unchecked")
-	public List<Tarefa>  listar() {
+	public List<Tarefa>  listarTarefas() {
 		String jpql = "select t from Tarefa t order by titulo";
-		sessao = JpaUtil.getEntityManager();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Query consulta = sessao.createQuery(jpql);
 		List<Tarefa> tarefas = consulta.getResultList();
+		sessao.close();
 		return tarefas;
 		
 	}
 	
-	
-
 }

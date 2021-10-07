@@ -2,45 +2,30 @@ package dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+
 import javax.persistence.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import domain.Funcionario;
-import domain.Tarefa;
-import util.JpaUtil;
+import interfaces.IFuncionarioDao;
+import modelo.Funcionario;
+import util.HibernateUtil;
 
-public class FuncionarioDao {
-	
-	private EntityManager sessao;
-	private EntityTransaction transacao;
-	
-	public void salvar(Funcionario funcionario) {
-		sessao = JpaUtil.getEntityManager();
-		transacao = sessao.getTransaction();
-		transacao.begin();
-		sessao.persist(funcionario);
-		transacao.commit();
-		sessao.close();
-		
-	}
-	
-	public Funcionario buscar(Integer numero) {
-		sessao = JpaUtil.getEntityManager();
-		Funcionario funcionario = sessao.find(Funcionario.class, numero);
-		return funcionario;
+public class FuncionarioDao extends GenericDaoImpl<Funcionario, Integer> implements IFuncionarioDao {
+
+	public FuncionarioDao() {
+		super(Funcionario.class);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Funcionario>  listar() {
+	public List<Funcionario>  listarFuncionarios() {
 		String jpql = "select f from Funcionario f order by nome";
-		sessao = JpaUtil.getEntityManager();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Query consulta = sessao.createQuery(jpql);
 		List<Funcionario> funcionario = consulta.getResultList();
+		sessao.close();
 		return funcionario;
 		
 	}
-	
-	
 	
 }
