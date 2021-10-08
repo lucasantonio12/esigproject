@@ -35,21 +35,13 @@ public class GenericDaoImpl<T, ID extends Serializable> implements IGenericDao<T
 	public void salvar(T object) {
 		this.session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.saveOrUpdate((T) object);
-		t.commit();
-		this.session.close();
-	}
-
-	@Override
-	public void editar(T object) {
-		this.session = HibernateUtil.getSessionFactory().openSession();
-		Transaction t = session.beginTransaction();
 		session.merge((T) object);
 		session.flush();
 		t.commit();
 		this.session.close();
 	}
 
+	
 	@Override
 	public void deletar(T object) {
 		this.session = HibernateUtil.getSessionFactory().openSession();

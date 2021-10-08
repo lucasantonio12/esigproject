@@ -51,12 +51,6 @@ public class FuncionarioDaoTest {
 		funDao.deleteAssociacao(f1);		
 	}
 	
-	@Test
-	public void editar(){
-		Funcionario funcionario = funDao.buscarId(2);
-		funcionario.setNome("Paolo Rodrigues");
-		funDao.editar(funcionario);
-	}
 	
 	@Test
 	public void listar() {

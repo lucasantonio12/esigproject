@@ -22,28 +22,40 @@ public class Tarefa {
 	@Column(name = "titulo", length = 50, nullable = false)
 	private String titulo;
 
-	@Column(name = "descricao", length = 50, nullable = true)
+	@Column(name = "descricao", length = 100, nullable = true)
 	private String descricao;
+	
+	@Column(name = "prioridade", length = 50, nullable = true)
+	private String prioridade;
+	
 
 	@ManyToMany(cascade = {CascadeType.MERGE})
 	@JoinTable(name = "tarefa_funcionarios",
 			joinColumns = @JoinColumn(name = "tarefa_id"),
 			inverseJoinColumns = @JoinColumn(name = "funcionarios_id"))
-	private List<Funcionario> funcionarios;
+	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
-	public Tarefa(String titulo, String descricao, List<Funcionario> funcionarios) {
-		this.titulo = titulo;
-		this.descricao = descricao;
-		this.funcionarios = funcionarios;
-	}
+	
 
 	public Tarefa() {
 	}
 
-	public Tarefa(Integer id, String titulo, String descricao, List<Funcionario> funcionarios) {
+	public Tarefa(Integer id, String titulo, String descricao, String prioridade, List<Funcionario> funcionarios) {
+		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.descricao = descricao;
+		this.prioridade = prioridade;
 		this.funcionarios = funcionarios;
 	}
+
+	public Tarefa(String titulo, String descricao, String prioridade, List<Funcionario> funcionarios) {
+		super();
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.prioridade = prioridade;
+		this.funcionarios = funcionarios;
+	}
+
+	
 }

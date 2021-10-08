@@ -43,11 +43,7 @@ public class FuncionarioBean {
 	}
 
 	public void salvar() {
-
-		
-
-		funcionarioDao.salvar(funcionario);
-		
+		funcionarioDao.salvar(funcionario);		
 		atualizarTela();
 		
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -57,11 +53,8 @@ public class FuncionarioBean {
 	}
 	
 	
-	public void deletar(Funcionario funcionario) {
-		
-		
-		funcionarioDao.deletar(funcionario);
-		
+	public void deletar(Funcionario funcionario) {	
+		funcionarioDao.deletar(funcionario);	
 		atualizarTela();
 		
 		FacesContext context = FacesContext.getCurrentInstance();

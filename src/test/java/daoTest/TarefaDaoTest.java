@@ -19,38 +19,32 @@ public class TarefaDaoTest {
 	TarefaDao tarefaDao = new TarefaDao();
 	FuncionarioDao funDao = new FuncionarioDao();
 	List<Funcionario> listaFun = new ArrayList<Funcionario>();
-
+/*
 	@Test
 	public void salvar() {
 
-		Tarefa tarefa1 = new Tarefa("limpar", "limpar sala2", Arrays.asList(new Funcionario(1,"adriano", "asg", "casado", "clt")));
+		Tarefa tarefa1 = new Tarefa("programar", "sala3","alta",Arrays.asList(new Funcionario(2,"paula", "front-end programer", "solteira", "clt")));
 		
 		tarefaDao.salvar(tarefa1);
 		
 	}
-/*
+*/
 	@Test
 	public void busca() {
 
-		Tarefa t1 = tarefaDao.buscarId(1);
-		Tarefa t2 = tarefaDao.buscarId(2);
+		Tarefa t1 = tarefaDao.buscarId(4);
+		Tarefa t2 = tarefaDao.buscarId(5);
 
 		System.out.println(t1);
 		System.out.println(t2);
 	}
-
+	/*
 	@Test
 	public void deletar() {
-		Tarefa t1 =tarefaDao.buscarId(1);
+		Tarefa t1 =tarefaDao.buscarId(4);
 		tarefaDao.deletar(t1);
 	}
-
-	@Test
-	public void editar() {
-		Tarefa tarefas =tarefaDao.buscarId(2);
-		tarefas.setDescricao("A tarefa foi concluida.");
-		tarefaDao.editar(tarefas);
-	}
+*/
 
 	@Test
 	public void listar() {
@@ -61,6 +55,6 @@ public class TarefaDaoTest {
 			System.out.println(tarefa);
 		}
 	}
-	*/
+	
 
 }

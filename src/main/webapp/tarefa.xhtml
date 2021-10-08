@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="menu.xhtml">
+	<ui:define name="title">Tarefas</ui:define>
+
+	<ui:define name="desenvolvimento">
+		<h:form id="painelDados">
+
+			<div class="Campos" align="center">
+
+				<p:panel header="Cadastrar tarefa">
+					<p:growl showDetail="true" sticky="true">
+						<p:autoUpdate />
+					</p:growl>
+
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Titulo" />
+						<p:inputText value="" required="true"
+							requiredMessage="Campo Titulo é Obrigatorio" />
+						<p:outputLabel value="Descrição" />
+						<p:inputText value="" />
+					</p:panelGrid>
+					<p:panelGrid columns="1">
+						<p:outputLabel value="Prioridade" />
+						<p:selectOneMenu value="">
+							<f:selectItem itemLabel="Alta" itemValue="Alta" />
+							<f:selectItem itemLabel="Média" itemValue="Média" />
+							<f:selectItem itemLabel="Baixa" itemValue="Baixa" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Responsavel" />
+						
+					</p:panelGrid>
+					<p:panelGrid columns="1">
+						<p:commandButton value="Salvar"
+							actionListener="#{Funcionario.salvar}"
+							update="painelDados listarDados" ajax="true" />
+					</p:panelGrid>
+
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

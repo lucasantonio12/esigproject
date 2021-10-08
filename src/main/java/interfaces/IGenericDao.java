@@ -16,7 +16,6 @@ import org.hibernate.criterion.Order;
 public interface IGenericDao<T, ID extends Serializable> { 
  
     void salvar(T object);
-    void editar(T object);
     void deletar(T object); 
     T buscarId(ID id);
   
