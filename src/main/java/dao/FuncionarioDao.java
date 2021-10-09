@@ -31,7 +31,7 @@ public class FuncionarioDao extends GenericDaoImpl<Funcionario, Integer> impleme
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = sessao.beginTransaction();
 
-		sessao.createNativeQuery("DELETE FROM tarefa_funcionarios WHERE funcionarios_id = ?")
+		sessao.createNativeQuery("DELETE FROM tarefa WHERE funcionarios_id = ?")
 				.setParameter(1, funcionario.getId())
 				.executeUpdate();
 	

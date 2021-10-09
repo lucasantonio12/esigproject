@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -16,58 +17,81 @@ import org.jboss.logging.Messages;
 import org.postgresql.translation.messages_pt_BR;
 
 import dao.FuncionarioDao;
+import dao.TarefaDao;
 import lombok.Data;
 import modelo.Funcionario;
 import modelo.Tarefa;
 
-@ManagedBean(name = "Funcionario", eager = true)
+@ManagedBean(name = "Tarefa", eager = true)
 @Named
 @ViewScoped
 @Data
-public class FuncionarioBean implements Serializable {
+public class TarefaBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Funcionario funcionario;
-	private FuncionarioDao funcionarioDao;
-	private List<Funcionario> listaFuncionarios;
 	private Tarefa tarefa;
+	private TarefaDao tarefaDao;
+	private List<Tarefa> listaTarefa;
+
+	private FuncionarioDao funDao;
+	private List<Funcionario> listaFuncionarios;
+
 	@PostConstruct
 	public void iniciar() {
-		funcionarioDao = new FuncionarioDao();
-		tarefa = new Tarefa();
-		listaFuncionarios = new ArrayList<Funcionario>();
+		tarefaDao = new TarefaDao();
+		listaTarefa = new ArrayList<Tarefa>();
+		funDao = new FuncionarioDao();
+
+		listaFuncionarios = funDao.listarFuncionarios();
 		atualizarTela();
 	}
 
 	public void atualizarTela() {
-		funcionario = new Funcionario();
-		listaFuncionarios = funcionarioDao.listarFuncionarios();
+		tarefa = new Tarefa();
+		listaTarefa.clear();
+		
+		List<Tarefa> listaAux = tarefaDao.listarTarefas();
+		 	
+		for (Tarefa tarefa : listaAux) {
+			if (tarefa.getConcluida() == false) {
+				listaTarefa.add(tarefa);
+			}
+		}
 	}
 
 	public void salvar() {
-		funcionarioDao.salvar(funcionario);		
+
+		tarefaDao.salvar(tarefa);
+
 		atualizarTela();
-		
+
 		FacesContext context = FacesContext.getCurrentInstance();
-		FacesMessage mensagem = new FacesMessage("Funcionario Salvo");
+		FacesMessage mensagem = new FacesMessage("Tarefa Salvo");
 		mensagem.setSeverity(FacesMessage.SEVERITY_INFO);
 		context.addMessage(null, mensagem);
 	}
-	
-	
-	public void deletar(Funcionario funcionario) {	
-		funcionarioDao.deleteAssociacao(funcionario);	
+
+	public void deletar(Tarefa tarefa) {
+		tarefaDao.deletar(tarefa);
 		atualizarTela();
-		
+
 		FacesContext context = FacesContext.getCurrentInstance();
-		FacesMessage mensagem = new FacesMessage("Funcionario Deletado");
+		FacesMessage mensagem = new FacesMessage("Tarefa Deletado");
 		mensagem.setSeverity(FacesMessage.SEVERITY_INFO);
 		context.addMessage(null, mensagem);
 	}
-	
-	public void editar(Funcionario funcionario) {
-		 this.funcionario = funcionario;
+
+	public void editar(Tarefa tarefa) {
+		this.tarefa = tarefa;
 	}
-	
+
+	public void concluida(Tarefa tarefa) {
+		tarefa.setConcluida(true);
+		tarefaDao.salvar(tarefa);
+		atualizarTela();
+	}
+
+
+
 }

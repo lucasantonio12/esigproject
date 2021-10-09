@@ -18,33 +18,33 @@ import modelo.Tarefa;
 public class TarefaDaoTest {
 	TarefaDao tarefaDao = new TarefaDao();
 	FuncionarioDao funDao = new FuncionarioDao();
-	List<Funcionario> listaFun = new ArrayList<Funcionario>();
-/*
+	
+
 	@Test
 	public void salvar() {
-
-		Tarefa tarefa1 = new Tarefa("programar", "sala3","alta",Arrays.asList(new Funcionario(2,"paula", "front-end programer", "solteira", "clt")));
+		Funcionario fun = funDao.buscarId(1);
+		Tarefa tarefa2 = new Tarefa("limas", "sala1","media",fun);
 		
-		tarefaDao.salvar(tarefa1);
+		tarefaDao.salvar(tarefa2);
 		
 	}
-*/
+
 	@Test
 	public void busca() {
 
-		Tarefa t1 = tarefaDao.buscarId(4);
-		Tarefa t2 = tarefaDao.buscarId(5);
+		Tarefa t1 = tarefaDao.buscarId(1);
+		Tarefa t2 = tarefaDao.buscarId(2);
 
 		System.out.println(t1);
 		System.out.println(t2);
 	}
-	/*
+	
 	@Test
 	public void deletar() {
-		Tarefa t1 =tarefaDao.buscarId(4);
+		Tarefa t1 =tarefaDao.buscarId(1);
 		tarefaDao.deletar(t1);
 	}
-*/
+
 
 	@Test
 	public void listar() {

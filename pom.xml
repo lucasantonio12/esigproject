@@ -98,6 +98,14 @@
 			<version>1.0.9</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.omnifaces/omnifaces -->
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>1.14.1</version>
+		</dependency>
+
+
 	</dependencies>
 
 </project>

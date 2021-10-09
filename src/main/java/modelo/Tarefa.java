@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Table(name = "Tarefa")
+@NoArgsConstructor
 public class Tarefa {
 
 	@Id
@@ -28,19 +29,14 @@ public class Tarefa {
 	@Column(name = "prioridade", length = 50, nullable = true)
 	private String prioridade;
 	
-
-	@ManyToMany(cascade = {CascadeType.MERGE})
-	@JoinTable(name = "tarefa_funcionarios",
-			joinColumns = @JoinColumn(name = "tarefa_id"),
-			inverseJoinColumns = @JoinColumn(name = "funcionarios_id"))
-	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
-
+	@ManyToOne()
+	@JoinColumn(nullable = false)
+	private Funcionario funcionarios;
 	
+	@Column(name = "concluida", nullable = false)
+	private Boolean concluida = false;
 
-	public Tarefa() {
-	}
-
-	public Tarefa(Integer id, String titulo, String descricao, String prioridade, List<Funcionario> funcionarios) {
+	public Tarefa(Integer id, String titulo, String descricao, String prioridade, Funcionario funcionarios) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -49,13 +45,16 @@ public class Tarefa {
 		this.funcionarios = funcionarios;
 	}
 
-	public Tarefa(String titulo, String descricao, String prioridade, List<Funcionario> funcionarios) {
+
+	public Tarefa(String titulo, String descricao, String prioridade, Funcionario funcionarios) {
 		super();
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.prioridade = prioridade;
 		this.funcionarios = funcionarios;
 	}
+
+	
 
 	
 }

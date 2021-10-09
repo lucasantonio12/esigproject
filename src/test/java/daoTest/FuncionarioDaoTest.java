@@ -19,7 +19,7 @@ public class FuncionarioDaoTest {
 	FuncionarioDao funDao = new FuncionarioDao();
 	Funcionario fun = new Funcionario("Lucas", "programador", "namorando", "clt");
 	
-	
+	/*
 	@Test
 	public void salvar() {
 		
@@ -44,14 +44,14 @@ public class FuncionarioDaoTest {
 		System.out.println(f1);
 		System.out.println(f2);
 	}
-	
+	*/
 	@Test
 	public void deletar() {
-		Funcionario f1 = funDao.buscarId(1);
+		Funcionario f1 = funDao.buscarId(2);
 		funDao.deleteAssociacao(f1);		
 	}
 	
-	
+	/*
 	@Test
 	public void listar() {
 	
@@ -61,5 +61,5 @@ public class FuncionarioDaoTest {
 			System.out.println(funcionario);
 		}
 	}
-	
+	*/
 }
