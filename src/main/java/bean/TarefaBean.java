@@ -50,9 +50,9 @@ public class TarefaBean implements Serializable {
 	public void atualizarTela() {
 		tarefa = new Tarefa();
 		listaTarefa.clear();
-		
+
 		List<Tarefa> listaAux = tarefaDao.listarTarefas();
-		 	
+
 		for (Tarefa tarefa : listaAux) {
 			if (tarefa.getConcluida() == false) {
 				listaTarefa.add(tarefa);
@@ -70,6 +70,50 @@ public class TarefaBean implements Serializable {
 		FacesMessage mensagem = new FacesMessage("Tarefa Salvo");
 		mensagem.setSeverity(FacesMessage.SEVERITY_INFO);
 		context.addMessage(null, mensagem);
+	}
+
+	public void buscarPrioridade() {
+		listaTarefa.clear();
+
+		List<Tarefa> listaAux = tarefaDao.buscaGeral("prioridade", tarefa.getPrioridade());
+
+		for (Tarefa tarefa : listaAux) {
+			listaTarefa.add(tarefa);
+		}
+		tarefa = new Tarefa();
+
+	}
+	
+	public void buscarTitulo() {
+		listaTarefa.clear();
+
+		List<Tarefa> listaAux = tarefaDao.buscaGeral("titulo", tarefa.getTitulo());
+
+		for (Tarefa tarefa : listaAux) {
+			listaTarefa.add(tarefa);
+		}
+		tarefa = new Tarefa();
+
+	}
+
+	public void buscarConcluida() {
+		listaTarefa.clear();
+		List<Tarefa> listaAux = new ArrayList<Tarefa>();
+		if (tarefa.getTitulo() == "false") {
+			listaAux = tarefaDao.buscaConcluida("concluida", false);
+		} else {
+			listaAux = tarefaDao.buscaConcluida("concluida", true);
+		}
+		for (Tarefa tarefa : listaAux) {
+			listaTarefa.add(tarefa);
+		}
+		
+		if(listaTarefa == null) {
+			listaTarefa.clear();
+		}
+
+		tarefa = new Tarefa();
+
 	}
 
 	public void deletar(Tarefa tarefa) {
@@ -91,7 +135,5 @@ public class TarefaBean implements Serializable {
 		tarefaDao.salvar(tarefa);
 		atualizarTela();
 	}
-
-
 
 }

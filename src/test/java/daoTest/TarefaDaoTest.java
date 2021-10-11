@@ -19,7 +19,7 @@ public class TarefaDaoTest {
 	TarefaDao tarefaDao = new TarefaDao();
 	FuncionarioDao funDao = new FuncionarioDao();
 	
-
+/*
 	@Test
 	public void salvar() {
 		Funcionario fun = funDao.buscarId(1);
@@ -54,7 +54,20 @@ public class TarefaDaoTest {
 		for (Tarefa tarefa : tarefas) {
 			System.out.println(tarefa);
 		}
+	
 	}
+	*/
+	
+	@Test
+	public void buscaGeral() {
+		List<Tarefa> tarefas = new ArrayList<Tarefa>();
+		tarefas = tarefaDao.buscaConcluida("concluida",true);
+		
+		for (Tarefa tarefa : tarefas) {
+			System.out.println(tarefa);
+		}
+	}
+	
 	
 
 }

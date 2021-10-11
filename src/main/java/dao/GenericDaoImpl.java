@@ -1,11 +1,16 @@
 package dao;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
 import interfaces.IGenericDao;
 import util.HibernateUtil;
 
@@ -41,7 +46,6 @@ public class GenericDaoImpl<T, ID extends Serializable> implements IGenericDao<T
 		this.session.close();
 	}
 
-	
 	@Override
 	public void deletar(T object) {
 		this.session = HibernateUtil.getSessionFactory().openSession();
@@ -50,5 +54,6 @@ public class GenericDaoImpl<T, ID extends Serializable> implements IGenericDao<T
 		t.commit();
 		this.session.close();
 	}
+
 
 }

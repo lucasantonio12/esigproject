@@ -18,6 +18,7 @@ public interface IGenericDao<T, ID extends Serializable> {
     void salvar(T object);
     void deletar(T object); 
     T buscarId(ID id);
+ 
   
     
 }
