@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title><ui:insert name="title">Convidados</ui:insert></title>
+    <h:outputStylesheet library="webjars" name="primeflex/2.0.0/primeflex.min.css"/>
+</h:head>
+<h:body>
+    <div align="center" style="margin: 10%">
+       
+        <div align="center" style="!important; width: 50% !important; height: 60%">
+            <p:messages showDetail="true" sticky="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+                <h:form id="formulario">
+                    <p:panel class="p-shadow-22" header="Convidados" >
+                        <p:panelGrid columns="2" >
+
+                            Convidado:<p:inputText placeholder="Convidado"
+                                                    value="#{Convidado.convidados.nome}" required="true" validatorMessage="Campo Nome Obrigatorio"/>
+                            Acompanhante:<p:inputText placeholder="Acompanhante"
+                                                       value="#{Convidado.convidados.agregados}" />
+                            Presente:<p:selectOneMenu value="#{Convidado.convidados.presentes}"
+                                                       converter="omnifaces.SelectItemsConverter" >
+                            <f:selectItems value="#{Convidado.listaPresentes}" var="con"
+                                           itemLabel="#{con.nome} - #{con.tipo}"/>
+                        </p:selectOneMenu>
+                        </p:panelGrid>
+
+                        <p:panelGrid columns="1" >
+                            <p:commandButton value="Confirma Presença" actionListener="#{Convidado.salvar}"
+                                             update="formulario" ajax="true" />
+                        </p:panelGrid>
+                    </p:panel>
+
+                </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

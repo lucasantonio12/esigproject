@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="menu.xhtml">
+	<ui:define name="title">Funcionario</ui:define>
+
+	<ui:define name="desenvolvimento">
+
+		<h:form id="painelDados">
+
+			<div class="Campos" align="center">
+
+				<p:panel header="Cadastrar Funcionarios">
+					<p:growl showDetail="true" sticky="true">
+						<p:autoUpdate />
+					</p:growl>
+
+					<p:panelGrid columns="4">
+						<p:outputLabel value="Nome" />
+						<p:inputText value="#{Funcionario.funcionario.nome}"
+							required="true" requiredMessage="Campo Nome é Obrigatorio" />
+						<p:outputLabel value="Especialização" />
+						<p:inputText value="#{Funcionario.funcionario.especializacao}" />
+						<p:outputLabel value="Cargo" />
+						<p:selectOneMenu value="#{Funcionario.funcionario.cargo}">
+							<f:selectItem itemLabel="Clt" itemValue="Clt" />
+							<f:selectItem itemLabel="Estagio" itemValue="Estagio" />
+							<f:selectItem itemLabel="Contrato" itemValue="Contrato" />
+							<f:selectItem itemLabel="Tercerizado" itemValue="Tercerizado" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Estado Civil" />
+						<p:selectOneMenu value="#{Funcionario.funcionario.estadoCivil}">
+							<f:selectItem itemLabel="Solteiro" itemValue="Solteiro" />
+							<f:selectItem itemLabel="Casado" itemValue="Casado" />
+							<f:selectItem itemLabel="Separado" itemValue="Separado" />
+							<f:selectItem itemLabel="Divorciado" itemValue="Divorciado" />
+							<f:selectItem itemLabel="Viúvo" itemValue="Viúvo" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid columns="1">
+						<p:commandButton value="Salvar"
+							actionListener="#{Funcionario.salvar}"
+							update="painelDados listarDados" ajax="true" />
+					</p:panelGrid>
+
+				</p:panel>
+			</div>
+		</h:form>
+		<p:separator />
+		<h:form id="listarDados">
+			<div class="listar" align="center">
+				<p:panel header="Listar Funcionarios">
+					<p:dataTable id="funlist"
+						emptyMessage="Nenhum funcionario cadastrado" paginator="true"
+						var="fun" value="#{Funcionario.listaFuncionarios}">
+						
+						<p:column headerText="Nome" filterBy="#{fun.nome}">
+							<h:outputText value="#{fun.nome}" />
+						</p:column>
+						<p:column headerText="Especialisação" filterBy="#{fun.especializacao}">
+							<h:outputText value="#{fun.especializacao}" />
+						</p:column>
+						<p:column headerText="Cargo" filterBy="#{fun.cargo}">
+							<h:outputText value="#{fun.cargo}" />
+						</p:column>
+						<p:column headerText="Estado Civil" filterBy="#{fun.estadoCivil}">
+							<h:outputText value="#{fun.estadoCivil}" />
+						</p:column>
+						<p:column headerText="Opções">
+							<p:commandButton value="Editar"
+								actionListener="#{Funcionario.editar(fun)}" ajax="true"
+								update="painelDados listarDados">
+							</p:commandButton>
+
+							<p:commandButton value="Deletar"
+								actionListener="#{Funcionario.deletar(fun)}" ajax="true"
+								update="painelDados listarDados">
+							</p:commandButton>
+
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</div>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
